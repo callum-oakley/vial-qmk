@@ -1,8 +1,8 @@
 #include QMK_KEYBOARD_H
 
-#define LA_NAV MO(NAV)
+#define LA_NAV TL_LOWR
 #define LA_LSYM MO(LSYM)
-#define LA_RSYM MO(RSYM)
+#define LA_RSYM TL_UPPR
 #define LA_FN MO(FN)
 #define LOCK LCMD(LCTL(KC_Q))
 #define CLOSE LCMD(KC_W)
@@ -11,6 +11,9 @@
 #define FRESH LCMD(KC_R)
 #define BACK LCMD(KC_LBRC)
 #define FWD LCMD(KC_RBRC)
+// TODO https://github.com/callum-oakley/qmk_firmware/blob/master/users/callum/swapper.c
+#define SWAP LCMD(KC_TAB)
+#define CMD_GRV LCMD(KC_GRV)
 
 enum layers {
     BASE,
@@ -30,9 +33,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [NAV] = LAYOUT_split_3x5_2_enc(
-        LOCK,    CLOSE,   TAB_L,   TAB_R,   _______,    _______, KC_BSPC, KC_UP,   KC_DEL,  KC_TAB,
+        SWAP,    CLOSE,   TAB_L,   TAB_R,   LOCK,       _______, KC_BSPC, KC_UP,   KC_DEL,  KC_TAB,
         KC_LCTL, KC_LALT, KC_LCMD, KC_LSFT, KC_ESC,     KC_ESC,  KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
-        LA_FN,   FRESH,   BACK,    FWD,     _______,    _______, KC_VOLD, KC_VOLU, KC_MPLY, _______,
+        CMD_GRV, FRESH,   BACK,    FWD,     QK_BOOT,    _______, KC_VOLD, KC_VOLU, KC_MPLY, _______,
                                    _______, _______,    _______, _______,
                                             _______,    _______
     ),
@@ -54,9 +57,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [FN] = LAYOUT_split_3x5_2_enc(
-        _______, _______, _______, _______, _______,    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,
-        _______, RM_TOGG, RM_PREV, RM_NEXT, _______,    _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,
-        _______, _______, _______, _______, QK_BOOT,    _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
+        KC_LCTL, KC_LALT, KC_LCMD, KC_LSFT, KC_ESC,     KC_ESC,  KC_RSFT, KC_RCMD, KC_RALT, KC_RCTL,
+        KC_F11,  KC_F12, _______, _______,  _______,    _______, RM_PREV, RM_NEXT, RM_TOGG, _______,
                                    _______, _______,    _______, _______,
                                             _______,    _______
     )
